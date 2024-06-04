@@ -1,0 +1,9 @@
+:concurrency: 5
+:queues:
+  - default
+
+FetchAndStoreUsersJob:
+  cron: '0 * * * *'   # every hour
+
+TabulateDailyRecordsJob:
+  cron: '59 23 * * *'  # every day at 23:59

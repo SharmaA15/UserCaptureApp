@@ -1,0 +1,26 @@
+<p>
+  <a href="{{ @users_path }}" class="btn btn-primary">View Users</a>
+  <a href="{{ @daily_records_path }}" class="btn btn-primary">View Daily Records</a>
+</p>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Male Count</th>
+      <th scope="col">Female Count</th>
+      <th scope="col">Male Average Age</th>
+      <th scope="col">Female Average Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in daily_records %}
+      <tr>
+        <td>{{ record.date }}</td>
+        <td>{{ record.male_count }}</td>
+        <td>{{ record.female_count }}</td>
+        <td>{{ record.male_avg_age }}</td>
+        <td>{{ record.female_avg_age }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,56 @@
+<p>
+  <a href="{{ @users_path }}" class="btn btn-primary">View Users</a>
+  <a href="{{ @daily_records_path }}" class="btn btn-primary">View Daily Records</a>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Created At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.name['first'] }} {{ user.name['last'] }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.created_at }}</td>
+        <td>
+          <a href="/users/{{ user.id }}" data-confirm="Are you sure?" onclick="deleteUser(event, '{{ user.id }}')">Delete</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<script>
+  function deleteUser(event, userId) {
+    event.preventDefault();
+    if (confirm('Are you sure?')) {
+      fetch('/users/' + userId, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': '{{csrf_token}}'
+        },
+      })
+      .then(response => {
+        if (response.ok) {
+          // Optionally, perform some action after successful deletion
+          console.log('User deleted successfully');
+          window.location.reload();
+        } else {
+          // Handle error response
+          console.error('Failed to delete user');
+        }
+      })
+      .catch(error => {
+        // Handle network error
+        console.error('Network error:', error);
+      });
+    }
+  }
+</script>
