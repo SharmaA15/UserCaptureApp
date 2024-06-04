@@ -15,6 +15,7 @@ Installation
 	2- Navigate to the project directory.
 		 	cd UserCaptureApp
 	3- bundle install
+	4- Make sure you have redis install if not then install the redis server.
 
 Database Setup
 	Run the following commands to create and set up the database:
@@ -36,3 +37,6 @@ Usage
 
 Viewing Records
 	Once the jobs have fetched and stored data, you can view records through the user interface.
+
+Run - 
+  - In one terminal run rails server (rails s) and in second run sidekiq server (sidekiq).
